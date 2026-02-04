@@ -3,6 +3,7 @@ package com.nagarro.digitalMart.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "product")
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

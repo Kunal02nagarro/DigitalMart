@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet author="kunal" id="create-tables-for-digital-mart">
+
+		<createTable tableName="product">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="name" type="VARCHAR(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="description" type="VARCHAR(500)">
+				<constraints nullable="true" />
+			</column>
+			<column name="price" type="DOUBLE">
+				<constraints nullable="true" />
+			</column>
+			<column name="stock" type="INTEGER">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+
+		<createTable tableName="users">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="username" type="VARCHAR(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="password" type="VARCHAR(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="email" type="VARCHAR(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="role" type="VARCHAR(50)">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+
+		<createTable tableName="orders">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="user_id" type="BIGINT">
+				<constraints nullable="true" foreignKeyName="fk_order_user" referencedTableName="users" referencedColumnNames="id" />
+			</column>
+			<column name="total" type="DOUBLE">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+
+		<createTable tableName="order_item">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="product_id" type="BIGINT">
+				<constraints nullable="true" foreignKeyName="fk_order_item_product" referencedTableName="product" referencedColumnNames="id" />
+			</column>
+			<column name="quantity" type="INTEGER">
+				<constraints nullable="true" />
+			</column>
+			<column name="order_id" type="BIGINT">
+				<constraints nullable="true" foreignKeyName="fk_order_item_order" referencedTableName="orders" referencedColumnNames="id" />
+			</column>
+		</createTable>
+
+	</changeSet>
+
+</databaseChangeLog> 
