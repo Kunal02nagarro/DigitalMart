@@ -40,6 +40,24 @@
             transform: translateY(-5px);
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
         }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+            background-color: #f0f0f0;
+        }
+        .product-image-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #e9ecef;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 3rem;
+        }
         .product-card .card-body {
             padding: 20px;
         }
@@ -137,6 +155,15 @@
 
             <div class="products-container" th:if="${products != null and products.size() > 0}">
                 <div class="product-card" th:each="product : ${products}">
+                    <div th:if="${product.imageName != null and product.imageName != ''}" class="product-image-placeholder">
+                        <img th:src="${@productService.getBlobImageUrl(product.imageName)}" 
+                             alt="Product Image" 
+                             class="product-image"
+                             onerror="this.style.display='none'">
+                    </div>
+                    <div th:unless="${product.imageName != null and product.imageName != ''}" class="product-image-placeholder">
+                        📷
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title" th:text="${product.name}"></h5>
                         <p class="card-text" th:text="${product.description != null ? product.description : 'No description available'}"></p>

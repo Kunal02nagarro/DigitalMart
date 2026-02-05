@@ -138,6 +138,11 @@
                     <input type="number" class="form-control" id="stock" th:field="*{stock}" min="0" required />
                 </div>
 
+                <div class="mb-3">
+                    <label for="imageName" class="form-label">Image Name</label>
+                    <input type="text" class="form-control" id="imageName" th:field="*{imageName}" placeholder="e.g., product-image.jpg" />
+                </div>
+
                 <button type="submit" class="btn btn-primary btn-lg">Add Product</button>
                 <a href="/products" class="btn btn-secondary btn-lg" style="margin-top: 30px; width: 100%;">Cancel</a>
             </form>
