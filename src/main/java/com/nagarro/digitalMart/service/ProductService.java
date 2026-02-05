@@ -15,6 +15,9 @@ public class ProductService {
 	@Autowired
 	private ProductRepository productRepository;
 	
+	@Autowired
+	private BlobStorageService blobStorageService;
+	
 	public List<Product> getAllProducts(){
 		return productRepository.findAll();
 	}
@@ -42,6 +45,18 @@ public class ProductService {
 	
 	public void delete(Long id) {
 		productRepository.deleteById(id);
+	}
+
+	public String getProductImageUrl(Long productId) {
+		Optional<Product> product = productRepository.findById(productId);
+		if (product.isPresent() && product.get().getImageName() != null) {
+			return blobStorageService.getBlobImageUrl(product.get().getImageName());
+		}
+		return null;
+	}
+
+	public String getBlobImageUrl(String imageName) {
+		return blobStorageService.getBlobImageUrl(imageName);
 	}
 
 }
