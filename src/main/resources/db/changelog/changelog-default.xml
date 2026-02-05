@@ -6,8 +6,11 @@
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
 	
-include file="changes/create-tables-for-digital-mart.xml"
+
+
+<include file="changes/create-tables-for-digital-mart.xml"
              relativeToChangelogFile="true"/>
+
 
 
 </databaseChangeLog>
